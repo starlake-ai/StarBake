@@ -11,72 +11,91 @@ The final goal of StarBake is to provide users a practical understanding of how 
 
 ### Tables to Ingest:
 
-1. **Customers:** This table houses customer-specific details. It includes fields such as `customer_id` (Primary Key), `customer_name`, and `contact_details`. The data for this table arrives in JSON format, updated daily with deltas.
+Here's a breakdown of the tables with column descriptions:
 
-2. **Orders:** This table contains order-specific information. Fields include `order_id` (Primary Key), `customer_id` (Foreign Key linking to Customers), `product_id` (Foreign Key linking to Products), `order_status`, `quantity`, and `order_timestamp`. The data for this table arrives in JsonND format, updated daily with deltas.
+1. **Customers:** This table contains information about the bakery's customers. The data for this table arrives in CSV format, updated daily with deltas.
+    - `customer_id` (PK): A unique identifier for each customer. Data type: Integer or UUID.
+    - `first_name`: The customer's first name. Data type: String.
+    - `last_name`: The customer's last name. Data type: String.
+    - `email`: The customer's email address. Data type: String.
+    - `join_date`: The date when the customer joined. Data type: Date.
 
-3. **Products:** This table stores records about the bakery items sold. It includes fields such as `product_id` (Primary Key), `product_name`, `product_description`, and `price`. The data for this table arrives in JsonND format, updated daily with deltas.
+2. **Orders:** This table contains information about the bakery's orders. The data for this table arrives in JSON format, updated daily with deltas.
+    - `order_id` (PK): A unique identifier for each order. Data type: Integer or UUID.
+    - `customer_id` (FK): An identifier for the customer who placed the order. Data type: Integer or UUID, referencing `Customers.customer_id`.
+    - `timestamp`: The date and time when the order was placed. Data type: DateTime.
+    - `status`: The status of the order, such as 'placed', 'shipped', or 'delivered'. Data type: String.
+    - `products`: An array of objects, each containing `product_id`, `quantity`, and `price`. Each object represents a product in the order.
+        - `product_id`: An identifier for the product. Data type: Integer or UUID, referencing `Products.product_id`.
+        - `quantity`: The quantity of this product in the order. Data type: Integer.
+        - `price`: The price of the product at the time of ordering. Data type: Decimal.
 
-4. **Suppliers:** This table carries details about suppliers. It includes fields such as `supplier_id` (Primary Key), `supplier_name`, and `contact_details`. The data for this table arrives in CSV format, with full updates daily.
+3. **Products:** This table contains information about the bakery's products. The data for this table arrives in JSON_ND format, updated daily with deltas.
+    - `product_id` (PK): A unique identifier for each product. Data type: Integer or UUID.
+    - `name`: The product's name. Data type: String. 
+    - `details`: A record containing additional details about the product.
+        - `price`: The current[orders.yaml](domains%2Forders.yaml) price of the product. Data type: Decimal.
+        - `description`: A detailed description of the product. Data type: String.
+        - `category`: The category of the product, such as 'bread', 'cake', or 'pastry'. Data type: String.
+    - `ingredients`: An array of objects, each containing `ingredient_id` and `quantity`. Each object represents an ingredient needed to make the product.
+        - `ingredient_id`: An identifier for the ingredient. Data type: Integer or UUID, referencing `Ingredients.ingredient_id`.
+        - `quantity`: The quantity of this ingredient needed to make the product. Data type: Decimal.
 
-5. **Ingredients:** This new table includes `ingredient_id` as a primary key, `ingredient_name`, the `cost` of each ingredient, and `supplier_id` as a foreign key linking to the Suppliers table. The data for this table arrives in CSV format, with full updates daily.
+4. **Ingredients:** This table contains information about the bakery's ingredients. The data for this table arrives in TSV format, updated daily with deltas.
+    - `ingredient_id` (PK): A unique identifier for each ingredient. Data type: Integer or UUID.
+    - `name`: The ingredient's name. Data type: String.
+    - `price`: The current price of the ingredient. Data type: Decimal.
+    - `quantity_in_stock`: The quantity of the ingredient currently in stock. Data type: Decimal.
 
-6. **ProductIngredients:** This table maps `Products` to `Ingredients`, crucial for calculating the total cost of ingredients for each product. It contains `product_id` and `ingredient_id` as foreign keys linking to the respective tables. The data for this table arrives in CSV format, with full updates daily.
+The data type mentioned in each field is a common standard, but the exact type can change depending on the database you are using. JSON objects and arrays are usually represented as strings in a database but parsed into their respective data structures when needed.
+
 
 ```mermaid
-classDiagram
-    class Customers {
-        +int customer_id (PK)
-        varchar customer_name
-        varchar contact_details
-    }
-    class Orders {
-        +int order_id (PK)
-        +int customer_id (FK)
-        +int product_id (FK)
-        varchar order_status
-        int quantity
-        datetime order_timestamp
-    }
-    class Products {
-        +int product_id (PK)
-        varchar product_name
-        varchar product_description
-        decimal price
-        varchar ingredients
-    }
-    class Suppliers {
-        +int supplier_id (PK)
-        varchar supplier_name
-        varchar contact_details
-    }
-    class Ingredients {
-        +int ingredient_id (PK)
-        varchar ingredient_name
-        decimal cost
-        +int supplier_id (FK)
-    }
-    class ProductIngredients {
-        +int product_id (FK)
-        +int ingredient_id (FK)
-    }
-    Customers "1" -- "0..*" Orders : PLACES
-    Orders "1" -- "1" Products : CONTAINS
-    Suppliers "1" -- "1..*" Ingredients : SUPPLIES
-    Products "1" -- "1..*" ProductIngredients : HAS
-    Ingredients "1" -- "1..*" ProductIngredients : USED_IN
+erDiagram
+    CUSTOMERS ||--o{ ORDERS : places
+    PRODUCTS ||--o{ ORDERS : "is ordered in"
+    PRODUCTS ||--o{ INGREDIENTS : "is made of"
 
+    CUSTOMERS {
+        int customer_id PK
+        string first_name
+        string last_name
+        string email
+        date join_date
+    }
+
+    ORDERS {
+        int order_id PK
+        int customer_id FK
+        datetime timestamp
+        string status
+        products[] products
+    }
+
+    PRODUCTS {
+        int product_id PK
+        string name
+        record details
+        ingredients[] ingredients
+    }
+
+    INGREDIENTS {
+        int ingredient_id PK
+        string name
+        decimal price
+        decimal quantity_in_stock
+    }
 
 ```
 
 
 ### Business Insights transformations:
 
-1. **CustomerLifetimeValue:** This table gives a projection of the total value a customer may bring to the bakery over the entirety of their relationship. This could be calculated using data from the `Orders` table, such as total spend to date, average spend per order, and frequency of orders.
+1. **CustomerLifetimeValue:** This table gives a projection of the total value a customer may bring to the bakery over the entirety of their relationship. This will be calculated using data from the `Customers` & `Orders` tables, and have total spend to date, average spend per order, and frequency of orders.
 
 2. **ProductPerformance:** This table provides details on the performance of each product sold at the bakery, including the total number of units sold, total revenue generated, and average revenue per unit sold. It's derived from the `Orders` and `Products` tables.
 
-3. **ProductProfitability:** This table offers insights into the profitability of each product. It considers the cost of production (based on the `Suppliers` table and the cost of ingredients), as well as the revenue generated (based on the `Orders` table).
+3. **ProductProfitability:** This table offers insights into the profitability of each product. It considers the cost of production (based on the `Products` table & `INGREDIENTS` table for the cost of ingredients).
 
 4. **HighValueCustomers:** This table identifies customers with the highest lifetime value, making it easier to target these customers for marketing campaigns. It's derived from the `CustomerLifetimeValue` table.
 
@@ -92,66 +111,65 @@ Additional tables that join multiple transformed tables:
 
 ```mermaid
 classDiagram
-    
+    Customers --|> CustomerLifetimeValue: uses
+    Orders --|> CustomerLifetimeValue: uses
+    Orders --|> ProductPerformance: uses
+    Products --|> ProductPerformance: uses
+    Products --|> ProductProfitability: uses
+    Ingredients --|> ProductProfitability: uses
+    CustomerLifetimeValue --|> HighValueCustomers: uses
+    ProductPerformance --|> TopSellingProducts: uses
+    ProductProfitability --|> MostProfitableProducts: uses
+    TopSellingProducts --|> TopSellingProfitableProducts: uses
+    MostProfitableProducts --|> TopSellingProfitableProducts: uses
+    HighValueCustomers --|> HighValueCustomerPreferences: uses
+    CustomerProductAffinity --|> HighValueCustomerPreferences: uses
+
     class CustomerLifetimeValue {
-        +int customer_id
-        decimal total_spend
-        decimal avg_spend_per_order
-        int frequency_of_orders
-        decimal projected_lifetime_value
-    }
-    class ProductPerformance {
-        +int product_id
-        int total_units_sold
-        decimal total_revenue
-        decimal average_revenue_per_unit
-    }
-    class ProductProfitability {
-        +int product_id
-        decimal total_revenue
-        decimal total_production_cost
-        decimal profitability
-    }
-    class HighValueCustomers {
-        +int customer_id
-        decimal lifetime_value
-    }
-    class TopSellingProducts {
-        +int product_id
-        int total_units_sold
-        decimal total_revenue
-    }
-    class MostProfitableProducts {
-        +int product_id
-        decimal profitability
-    }
-    class TopSellingProfitableProducts {
-        +int product_id
-        int total_units_sold
-        decimal total_revenue
-        decimal profitability
-    }
-    class HighValueCustomerPreferences {
-        +int customer_id
-        decimal lifetime_value
-        +int product_id
-        int num_orders
+        +total_spend_to_date: decimal
+        +average_spend_per_order: decimal
+        +frequency_of_orders: integer
     }
 
-    Customers --> CustomerLifetimeValue : ContributesTo
-    Orders --> CustomerLifetimeValue : ContributesTo
-    Orders --> ProductPerformance : ContributesTo
-    Products --> ProductPerformance : ContributesTo
-    Orders --> ProductProfitability : ContributesTo
-    Products --> ProductProfitability : ContributesTo
-    Suppliers --> ProductProfitability : ContributesTo
-    CustomerLifetimeValue --> HighValueCustomers : Defines
-    ProductPerformance --> TopSellingProducts : Defines
-    ProductProfitability --> MostProfitableProducts : Defines
-    TopSellingProducts --> TopSellingProfitableProducts : MergesWith
-    MostProfitableProducts --> TopSellingProfitableProducts : MergesWith
-    HighValueCustomers --> HighValueCustomerPreferences : Influences
-    Orders --> HighValueCustomerPreferences : Influences
+    class ProductPerformance {
+        +total_units_sold: integer
+        +total_revenue: decimal
+        +average_revenue_per_unit: decimal
+    }
+
+    class ProductProfitability {
+        +profit_margin_per_product: decimal
+    }
+
+    class HighValueCustomers {
+        +customer_id: integer
+        +lifetime_value: decimal
+    }
+
+    class TopSellingProducts {
+        +product_id: integer
+        +units_sold: integer
+        +revenue: decimal
+    }
+
+    class MostProfitableProducts {
+        +product_id: integer
+        +profit_margin: decimal
+    }
+
+    class TopSellingProfitableProducts {
+        +product_id: integer
+        +units_sold: integer
+        +revenue: decimal
+        +profit_margin: decimal
+    }
+
+    class HighValueCustomerPreferences {
+        +customer_id: integer
+        +product_id: integer
+        +affinity_score: decimal
+    }
+
 
 
 ```
@@ -161,10 +179,10 @@ The project aims to give users a practical understanding of Starlake's functiona
 ## To-Do List
 
 #### Data Ingestion
-- [ ] Set up data ingestion mechanisms for each of the primary tables.
-    - [ ] Configure JSON data ingestion for the `Customers` table.
-    - [ ] Configure JsonND data ingestion for the `Orders` and `Products` tables.
-    - [ ] Configure CSV data ingestion for the `Suppliers`, `Ingredients`, and `ProductIngredients` tables.
+- [x] Set up data ingestion mechanisms for each of the primary tables.
+    - [x] Configure CSV data ingestion for the `Customers`, and `Ingredients` tables.
+    - [x] Configure JSON data ingestion for the `Orders` table.
+    - [x] Configure JsonND data ingestion for the `Products` table.
 
 #### Data Transformation
 - [ ] Define transformations for creating analytical tables.
