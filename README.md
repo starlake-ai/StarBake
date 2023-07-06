@@ -186,12 +186,14 @@ The project aims to give users a practical understanding of Starlake's functiona
 
 #### Data Transformation
 - [ ] Define transformations for creating analytical tables.
-    - [ ] Design transformations for `CustomerLifetimeValue` using data from `Orders`.
-    - [ ] Design transformations for `ProductPerformance` using data from `Orders` and `Products`.
-    - [ ] Design transformations for `ProductProfitability` using data from `Orders`, `Suppliers`, and `Products`.
-    - [ ] Design transformations for `HighValueCustomers` using data from `CustomerLifetimeValue`.
-    - [ ] Design transformations for `TopSellingProducts` using data from `ProductPerformance`.
-    - [ ] Design transformations for `MostProfitableProducts` using data from `ProductProfitability`.
+    - [ ] Design transformations for CustomerLifetimeValue
+    - [ ] Design transformations for ProductPerformance
+    - [ ] Design transformations for ProductProfitability
+    - [ ] Design transformations for HighValueCustomers
+    - [ ] Design transformations for TopSellingProducts
+    - [ ] Design transformations for MostProfitableProducts
+    - [ ] Design transformations for TopSellingProfitableProducts
+    - [ ] Design transformations for HighValueCustomerPreferences
 
 #### Data Combination
 - [ ] Combine multiple transformed tables to create new analytical tables.
