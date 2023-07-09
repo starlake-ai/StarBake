@@ -126,39 +126,50 @@ classDiagram
     CustomerProductAffinity --|> HighValueCustomerPreferences: uses
 
     class CustomerLifetimeValue {
+        +customer_id: integer
+        +customer_full_name: string
+        +customer_join_date: date
         +total_spend_to_date: decimal
         +average_spend_per_order: decimal
         +frequency_of_orders: integer
     }
 
     class ProductPerformance {
+        +product_id: integer
+        +product_name: string
         +total_units_sold: integer
         +total_revenue: decimal
         +average_revenue_per_unit: decimal
     }
 
     class ProductProfitability {
+        +product_id: integer
+        +product_name: string
         +profit_margin_per_product: decimal
     }
 
     class HighValueCustomers {
         +customer_id: integer
+        +customer_full_name: string
         +lifetime_value: decimal
     }
 
     class TopSellingProducts {
         +product_id: integer
+        +product_name: string
         +units_sold: integer
         +revenue: decimal
     }
 
     class MostProfitableProducts {
         +product_id: integer
+        +product_name: string
         +profit_margin: decimal
     }
 
     class TopSellingProfitableProducts {
         +product_id: integer
+        +product_name: string
         +units_sold: integer
         +revenue: decimal
         +profit_margin: decimal
@@ -166,11 +177,11 @@ classDiagram
 
     class HighValueCustomerPreferences {
         +customer_id: integer
+        +customer_full_name: string
         +product_id: integer
+        +product_name: string
         +affinity_score: decimal
     }
-
-
 
 ```
 The project aims to give users a practical understanding of Starlake's functionalities, allowing them to leverage these features for their data transformation and analytics requirements.

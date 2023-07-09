@@ -1,0 +1,23 @@
+tables:
+  - name: "Ingredients"
+    pattern: "ingredients-.*.csv"
+    primaryKey: ingredient_id
+    metadata:
+      mode: "FILE"
+      format: "DSV"
+      withHeader: true
+      separator: "\t"
+      write: "TODO"
+    attributes:
+      - name: "ingredient_id"
+        type: "int"
+        required: true
+      - name: "name"
+        type: "string"
+        required: true
+      - name: "price"
+        type: "decimal"
+        required: true
+      - name: "quantity_in_stock"
+        type: "decimal"
+        required: true
