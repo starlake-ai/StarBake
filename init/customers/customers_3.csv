@@ -1,0 +1,6 @@
+customer_id,first_name,last_name,email,join_date
+11,James,Robinson,jamesrobinson@example.com,2023-07-09
+12,Emma,White,emmawhite@example.com,2023-07-09
+13,Alexander,Hall,alexanderhall@example.com,2023-07-09
+14,Sophia,Young,sophiayoung@example.com,2023-07-09
+15,Mason,Walker,masonwalker@example.com,2023-07-09

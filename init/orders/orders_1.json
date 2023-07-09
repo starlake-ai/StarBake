@@ -1,0 +1,38 @@
+[
+  {
+    "order_id": 1,
+    "customer_id": 1,
+    "timestamp": "2023-01-01T10:00:00",
+    "status": "placed",
+    "products": [
+      {
+        "product_id": 1,
+        "quantity": 2,
+        "price": 5.99
+      },
+      {
+        "product_id": 2,
+        "quantity": 1,
+        "price": 3.49
+      }
+    ]
+  },
+  {
+    "order_id": 2,
+    "customer_id": 2,
+    "timestamp": "2023-02-15T14:30:00",
+    "status": "shipped",
+    "products": [
+      {
+        "product_id": 3,
+        "quantity": 1,
+        "price": 7.99
+      },
+      {
+        "product_id": 4,
+        "quantity": 3,
+        "price": 2.99
+      }
+    ]
+  }
+]

@@ -173,8 +173,11 @@ classDiagram
 
 
 ```
-
 The project aims to give users a practical understanding of Starlake's functionalities, allowing them to leverage these features for their data transformation and analytics requirements.
+
+## How to run
+1. Create a dataset in your project called `starbake` : ```bq mk --dataset --location=europe-west1 starbake```
+2. 
 
 ## To-Do List
 

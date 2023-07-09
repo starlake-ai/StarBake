@@ -1,0 +1,44 @@
+[
+  {
+    "product_id": 5,
+    "name": "Apple Pie",
+    "details": {
+      "price": 9.99,
+      "description": "Classic homemade apple pie.",
+      "category": "pastry"
+    },
+    "ingredients": [
+      {
+        "ingredient_id": 1,
+        "quantity": 0.5
+      },
+      {
+        "ingredient_id": 3,
+        "quantity": 0.2
+      },
+      {
+        "ingredient_id": 4,
+        "quantity": 0.4
+      }
+    ]
+  },
+  {
+    "product_id": 6,
+    "name": "Baguette",
+    "details": {
+      "price": 3.99,
+      "description": "Crusty French baguette.",
+      "category": "bread"
+    },
+    "ingredients": [
+      {
+        "ingredient_id": 1,
+        "quantity": 0.3
+      },
+      {
+        "ingredient_id": 2,
+        "quantity": 0.1
+      }
+    ]
+  }
+]

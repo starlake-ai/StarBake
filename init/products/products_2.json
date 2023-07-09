@@ -1,0 +1,40 @@
+[
+  {
+    "product_id": 3,
+    "name": "Croissant",
+    "details": {
+      "price": 1.99,
+      "description": "Flaky and buttery croissant.",
+      "category": "pastry"
+    },
+    "ingredients": [
+      {
+        "ingredient_id": 2,
+        "quantity": 0.3
+      },
+      {
+        "ingredient_id": 4,
+        "quantity": 0.2
+      }
+    ]
+  },
+  {
+    "product_id": 4,
+    "name": "Sourdough Bread",
+    "details": {
+      "price": 4.99,
+      "description": "Artisanal sourdough bread.",
+      "category": "bread"
+    },
+    "ingredients": [
+      {
+        "ingredient_id": 1,
+        "quantity": 0.5
+      },
+      {
+        "ingredient_id": 3,
+        "quantity": 0.1
+      }
+    ]
+  }
+]

@@ -1,0 +1,44 @@
+[
+  {
+    "product_id": 9,
+    "name": "Cheesecake",
+    "details": {
+      "price": 7.99,
+      "description": "Creamy and indulgent cheesecake.",
+      "category": "cake"
+    },
+    "ingredients": [
+      {
+        "ingredient_id": 1,
+        "quantity": 0.4
+      },
+      {
+        "ingredient_id": 3,
+        "quantity": 0.3
+      },
+      {
+        "ingredient_id": 4,
+        "quantity": 0.5
+      }
+    ]
+  },
+  {
+    "product_id": 10,
+    "name": "Pretzel",
+    "details": {
+      "price": 1.99,
+      "description": "Salty and crunchy pretzel.",
+      "category": "snack"
+    },
+    "ingredients": [
+      {
+        "ingredient_id": 1,
+        "quantity": 0.2
+      },
+      {
+        "ingredient_id": 2,
+        "quantity": 0.15
+      }
+    ]
+  }
+]

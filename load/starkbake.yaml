@@ -108,7 +108,7 @@ schemas:
       mode: "FILE"
       format: "DSV"
       withHeader: true
-      separator: "|"
+      separator: "\t"
       write: "TODO"
     attributes:
       - name: "ingredient_id"

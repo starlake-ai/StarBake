@@ -1,0 +1,44 @@
+[
+  {
+    "product_id": 1,
+    "name": "Chocolate Chip Cookie",
+    "details": {
+      "price": 1.99,
+      "description": "Delicious chocolate chip cookie.",
+      "category": "cookie"
+    },
+    "ingredients": [
+      {
+        "ingredient_id": 1,
+        "quantity": 0.2
+      },
+      {
+        "ingredient_id": 2,
+        "quantity": 0.1
+      },
+      {
+        "ingredient_id": 3,
+        "quantity": 0.3
+      }
+    ]
+  },
+  {
+    "product_id": 2,
+    "name": "Blueberry Muffin",
+    "details": {
+      "price": 2.49,
+      "description": "Freshly baked blueberry muffin.",
+      "category": "muffin"
+    },
+    "ingredients": [
+      {
+        "ingredient_id": 2,
+        "quantity": 0.2
+      },
+      {
+        "ingredient_id": 4,
+        "quantity": 0.3
+      }
+    ]
+  }
+]
