@@ -1,6 +1,6 @@
 tables:
   - name: "Ingredients"
-    pattern: "ingredients-.*.csv"
+    pattern: "ingredients_.*.tsv"
     primaryKey:
       - ingredient_id
     metadata:

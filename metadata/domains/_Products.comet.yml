@@ -1,6 +1,6 @@
 tables:
   - name: "Products"
-    pattern: "products-.*.json"
+    pattern: "products_.*.json"
     primaryKey:
       - product_id
     metadata:
@@ -19,7 +19,7 @@ tables:
         required: true
         attributes:
           - name: "price"
-            type: "int"
+            type: "double"
             required: true
           - name: "description"
             type: "string"
@@ -37,5 +37,5 @@ tables:
             type: "int"
             required: true
           - name: "quantity"
-            type: "int"
+            type: "double"
             required: true

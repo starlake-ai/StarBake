@@ -1,6 +1,6 @@
 tables:
   - name: "Customers"
-    pattern: "customers-.*.csv"
+    pattern: "customers_.*.csv"
     primaryKey:
       - customer_id
     metadata:

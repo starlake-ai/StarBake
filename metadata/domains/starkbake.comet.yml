@@ -1,7 +1,9 @@
 load:
   name: "starbake"
   metadata:
-    directory: "${root_path}/incoming"
+    directory: "{{root_path}}/day_1"
+    sink:
+      type: "BQ"
   tableRefs:
     - "_Customers"
     - "_Orders"
