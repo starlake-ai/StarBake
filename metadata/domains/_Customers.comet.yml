@@ -8,7 +8,7 @@ tables:
       format: "DSV"
       withHeader: true
       separator: ","
-      write: "TODO"
+      write: "OVERWRITE"
     attributes:
       - name: "customer_id"
         type: "int"

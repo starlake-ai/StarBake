@@ -1,13 +1,14 @@
 tables:
   - name: "Ingredients"
     pattern: "ingredients-.*.csv"
-    primaryKey: ingredient_id
+    primaryKey:
+      - ingredient_id
     metadata:
       mode: "FILE"
       format: "DSV"
       withHeader: true
       separator: "\t"
-      write: "TODO"
+      write: "OVERWRITE"
     attributes:
       - name: "ingredient_id"
         type: "int"

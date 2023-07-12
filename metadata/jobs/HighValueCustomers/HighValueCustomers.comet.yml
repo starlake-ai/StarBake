@@ -1,0 +1,13 @@
+transform:
+  name: "CustomerLifetimeValue"
+  engine: "bigquery"
+  tasks:
+    - name: high_value_customer_preferences
+      domain: business_insights
+      table: high_value_customer_preferences
+      write: OVERWRITE
+    - name: high_value_customers
+      domain: business_insights
+      table: high_value_customers
+      write: OVERWRITE
+

@@ -1,10 +1,11 @@
 tables:
   - name: "Products"
     pattern: "products-.*.json"
-    primaryKey: product_id
+    primaryKey:
+      - product_id
     metadata:
       mode: "FILE"
-      format: "JSON_ND"
+      format: "JSON"
       write: "APPEND"
     attributes:
       - name: "product_id"

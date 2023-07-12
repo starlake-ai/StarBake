@@ -1,12 +1,13 @@
 tables:
   - name: "Orders"
     pattern: "orders-.*.json"
-    primaryKey: order_id
+    primaryKey:
+      - order_id
     metadata:
       mode: "FILE"
       format: "JSON"
       array: true
-      write: "TODO"
+      write: "APPEND"
     attributes:
       - name: "order_id"
         type: "int"
