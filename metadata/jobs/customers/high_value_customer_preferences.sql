@@ -3,5 +3,5 @@ SELECT
     cp.product_id,
     cp.affinity_score
 FROM
-    HighValueCustomers hvc
+    high_value_customers hvc
         JOIN CustomerProductAffinity cp ON hvc.customer_id = cp.customer_id;

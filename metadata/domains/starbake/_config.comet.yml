@@ -1,0 +1,9 @@
+load:
+  name: "starbake"
+  metadata:
+    directory: "{{root_path}}/day_1"
+  tableRefs:
+    - "Customers"
+    - "Orders"
+    - "Products"
+    - "Ingredients"

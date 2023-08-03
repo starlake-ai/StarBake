@@ -1,9 +1,0 @@
-transform:
-  name: "CustomerLifetimeValue"
-  engine: "bigquery"
-  tasks:
-    - name: customer_lifetime_value
-      domain: business_insights
-      table: customer_lifetime_value
-      write: OVERWRITE
-

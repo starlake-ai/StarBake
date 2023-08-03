@@ -3,11 +3,11 @@
 #validator: "spark" # "spark" (default) or "native"
 
 
-connectionRef: {{ connection_ref }} # default connection ref if not specified in domains / jobs
+connectionRef: {{ myConnection }} # default connection ref if not specified in domains / jobs
 
 audit:
   sink:
-    connectionRef: {{ connection_ref }}
+    connectionRef: {{ myConnection }}
     # database: "project-id" # default to user default project
     # dataset: "audit" # Audit dataset (default to "audit")
 

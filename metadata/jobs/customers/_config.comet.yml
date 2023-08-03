@@ -1,0 +1,8 @@
+transform:
+  default:
+    write: OVERWRITE
+  taskRefs:
+    - customer_lifetime_value
+    - high_value_customer_preferences
+    - high_value_customers
+
