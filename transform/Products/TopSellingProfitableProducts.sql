@@ -1,0 +1,9 @@
+SELECT
+    TSP.product_id, TSP.product_name
+FROM
+    TopSellingProducts TSP
+UNION ALL
+SELECT
+    MPP.product_id, MPP.product_name
+FROM
+    MostProfitableProducts MPP

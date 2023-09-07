@@ -64,4 +64,4 @@ $RECYCLE.BIN/
 
 # Code
 venv
-datasets/archive
+datasets

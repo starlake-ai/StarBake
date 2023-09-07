@@ -107,8 +107,6 @@ Additional tables that join multiple transformed tables:
 
 7. **TopSellingProfitableProducts:** This table combines the `TopSellingProducts` and `MostProfitableProducts` tables to highlight the products that are not only top sellers but also bring in high profit margins.
 
-8. **HighValueCustomerPreferences:** This table combines the `HighValueCustomers` and `CustomerProductAffinity` tables to determine the product preferences of high-value customers.
-
 ```mermaid
 classDiagram
     Customers --|> CustomerLifetimeValue: uses
@@ -122,8 +120,6 @@ classDiagram
     ProductProfitability --|> MostProfitableProducts: uses
     TopSellingProducts --|> TopSellingProfitableProducts: uses
     MostProfitableProducts --|> TopSellingProfitableProducts: uses
-    HighValueCustomers --|> HighValueCustomerPreferences: uses
-    CustomerProductAffinity --|> HighValueCustomerPreferences: uses
 
     class CustomerLifetimeValue {
         +customer_id: integer
@@ -175,20 +171,12 @@ classDiagram
         +profit_margin: decimal
     }
 
-    class HighValueCustomerPreferences {
-        +customer_id: integer
-        +customer_full_name: string
-        +product_id: integer
-        +product_name: string
-        +affinity_score: decimal
-    }
 
 ```
 The project aims to give users a practical understanding of Starlake's functionalities, allowing them to leverage these features for their data transformation and analytics requirements.
 
 ## How to run
-1. Create a dataset in your project called `starbake` : ```bq mk --dataset --location=europe-west1 starbake```
-2. 
+Please check [HOW_TO_RUN.md](HOW_TO_RUN.md)
 
 ## To-Do List
 
@@ -199,20 +187,18 @@ The project aims to give users a practical understanding of Starlake's functiona
     - [x] Configure JsonND data ingestion for the `Products` table.
 
 #### Data Transformation
-- [ ] Define transformations for creating analytical tables.
-    - [ ] Design transformations for CustomerLifetimeValue
-    - [ ] Design transformations for ProductPerformance
-    - [ ] Design transformations for ProductProfitability
-    - [ ] Design transformations for HighValueCustomers
-    - [ ] Design transformations for TopSellingProducts
-    - [ ] Design transformations for MostProfitableProducts
-    - [ ] Design transformations for TopSellingProfitableProducts
-    - [ ] Design transformations for HighValueCustomerPreferences
+- [x] Define transformations for creating analytical tables.
+    - [x] Design transformations for CustomerLifetimeValue
+    - [x] Design transformations for ProductPerformance
+    - [x] Design transformations for ProductProfitability
+    - [x] Design transformations for HighValueCustomers
+    - [x] Design transformations for TopSellingProducts
+    - [x] Design transformations for MostProfitableProducts
+    - [x] Design transformations for TopSellingProfitableProducts
 
 #### Data Combination
-- [ ] Combine multiple transformed tables to create new analytical tables.
-    - [ ] Create `TopSellingProfitableProducts` table by merging `TopSellingProducts` and `MostProfitableProducts`.
-    - [ ] Create `HighValueCustomerPreferences` table by merging `HighValueCustomers` and `Orders`.
+- [x] Combine multiple transformed tables to create new analytical tables.
+    - [x] Create `TopSellingProfitableProducts` table by merging `TopSellingProducts` and `MostProfitableProducts`.
 
 #### Workflow
 - [ ] Add .vscode project configuration that include the necessary plugins.

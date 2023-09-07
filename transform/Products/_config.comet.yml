@@ -1,0 +1,11 @@
+transform:
+  default:
+    write: OVERWRITE
+  taskRefs:
+    - MostProfitableProducts
+    - ProductPerformance
+    - ProductProfitability
+    - TopSellingProducts
+    - TopSellingProfitableProducts
+
+

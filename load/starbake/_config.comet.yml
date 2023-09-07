@@ -1,0 +1,8 @@
+load:
+  metadata:
+    directory: "{{root_path}}/datasets/incoming/starbake"
+  tableRefs:
+    - "Customers"
+    - "Orders"
+    - "Products"
+    - "Ingredients"
