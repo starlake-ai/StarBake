@@ -1,4 +1,5 @@
 ---
+# to change to application.comet.yml
 connectionRef: starbake-bigquery
 
 audit:
@@ -12,3 +13,4 @@ connections:
       location: europe-west1
       authType: "APPLICATION_DEFAULT"
       authScopes: "https://www.googleapis.com/auth/cloud-platform"
+      writeMethod: "direct"

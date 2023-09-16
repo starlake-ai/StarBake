@@ -1,0 +1,38 @@
+table:
+  name: "Orders"
+  pattern: "orders_.*.json"
+  primaryKey:
+    - order_id
+  metadata:
+    mode: "FILE"
+    format: "JSON"
+    array: true
+    write: "APPEND"
+  attributes:
+    - name: "order_id"
+      type: "int"
+      required: true
+    - name: "customer_id"
+      type: "int"
+      foreignKey: "Customers.customer_id"
+      required: true
+    - name: "timestamp"
+      type: "iso_instant"
+      required: true
+    - name: "status"
+      type: "string"
+      required: true
+    - name: "products"
+      type: "struct"
+      array: true
+      required: true
+      attributes:
+        - name: "product_id"
+          type: "int"
+          required: true
+        - name: "quantity"
+          type: "int"
+          required: false
+        - name: "price"
+          type: "double"
+          required: true
