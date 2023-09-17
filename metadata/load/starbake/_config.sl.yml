@@ -1,0 +1,4 @@
+load:
+  name: "starbake"
+  metadata:
+    directory: "{{root_path}}/datasets/incoming/starbake/day_1"

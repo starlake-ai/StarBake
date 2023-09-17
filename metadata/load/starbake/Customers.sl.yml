@@ -1,0 +1,26 @@
+table:
+  name: "Customers"
+  pattern: "customers_.*.csv"
+  primaryKey:
+    - customer_id
+  metadata:
+    format: "DSV"
+    withHeader: true
+    separator: ","
+    write: "OVERWRITE"
+  attributes:
+    - name: "customer_id"
+      type: "int"
+      required: true
+    - name: "first_name"
+      type: "string"
+      required: true
+    - name: "last_name"
+      type: "string"
+      required: true
+    - name: "email"
+      type: "string"
+      required: true
+    - name: "join_date"
+      type: "date"
+      required: true

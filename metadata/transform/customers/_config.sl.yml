@@ -1,0 +1,4 @@
+transform:
+  name: "customers"
+  default:
+    write: OVERWRITE
