@@ -4,7 +4,6 @@ table:
   primaryKey:
     - customer_id
   metadata:
-    mode: "FILE"
     format: "DSV"
     withHeader: true
     separator: ","

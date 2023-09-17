@@ -4,7 +4,6 @@ table:
   primaryKey:
     - order_id
   metadata:
-    mode: "FILE"
     format: "JSON"
     array: true
     write: "APPEND"
