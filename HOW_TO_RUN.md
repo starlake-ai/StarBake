@@ -3,8 +3,9 @@ Thi
 ## Install 
 
 1. Install Starlake
-    `SL_VERSION=0.8.0-SNAPSHOT sh /Users/elarib/Work/Starlake/starlake/distrib/starlake.sh`
+    `SL_VERSION=1.0.0-SNAPSHOT sh /Users/elarib/Work/Starlake/starlake/distrib/starlake.sh`
 2. Generate dummy files
+   `pip install faker`
    `python _scripts/dummy_data_generator.py`
 
 We're good to go
