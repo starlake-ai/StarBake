@@ -1,6 +1,6 @@
 ---
 application:
-  #validator: "spark" # "spark" (default) or "native"
+  loader: "native" # "spark" (default) or "native"
   connectionRef: starbake-bigquery
 
   audit:
