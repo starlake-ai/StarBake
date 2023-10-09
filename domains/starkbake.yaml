@@ -1,9 +1,0 @@
-load:
-  name: "starbake"
-  metadata:
-    directory: "${root_path}/incoming"
-  tableRefs:
-    - "_Customers"
-    - "_Orders"
-    - "_Products"
-    - "_Ingredients"

@@ -9,7 +9,7 @@ import pandas as pd
 from faker import Faker
 import pathlib
 
-data_dir = str(pathlib.Path(__file__).parent.resolve().parent)+'/_data/source'
+data_dir = str(pathlib.Path(__file__).parent.resolve().parent)+'/datasets/incoming/starbake'
 
 fake = Faker()
 
