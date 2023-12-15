@@ -10,7 +10,7 @@ WITH ProductCostSummary AS (
             ELSE 0
             END AS profit_per_unit
     FROM
-        starbake.Orders o
+         starbake.Orders o
             CROSS JOIN
         UNNEST(o.products) AS op
             JOIN

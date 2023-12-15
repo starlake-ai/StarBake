@@ -6,7 +6,7 @@ WITH ProductSalesSummary AS (
         SUM(op.quantity * op.price) AS total_revenue,
         CASE
             WHEN SUM(op.quantity) > 0 THEN SUM(op.quantity * op.price) / SUM(op.quantity)
-            ELSE 0
+            ELSE 0 
             END AS average_revenue_per_unit
     FROM
         starbake.Orders o

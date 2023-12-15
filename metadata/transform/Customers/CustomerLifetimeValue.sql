@@ -26,7 +26,8 @@ With CustomerOrderSummary AS (
     GROUP BY
         c.customer_id,
         c.first_name,
-        c.last_name
+        c.last_name,
+        c.join_date
 )
 
 SELECT
