@@ -1,0 +1,14 @@
+---
+load:
+  name: "starbake"
+  metadata:
+    mode: "FILE"
+    format: "DSV"
+    encoding: "UTF-8"
+    multiline: false
+    array: false
+    withHeader: true
+    separator: ";"
+    quote: "\""
+    escape: "\\"
+    directory: "/Users/hayssams/git/public/starlake/samples/local/quickstart/datasets/incoming/starbake/day_1"

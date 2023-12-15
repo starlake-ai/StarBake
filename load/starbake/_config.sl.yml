@@ -1,3 +1,0 @@
-load:
-  metadata:
-    directory: "{{root_path}}/datasets/incoming/starbake/day_1" # TO change this
