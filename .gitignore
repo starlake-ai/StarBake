@@ -65,3 +65,14 @@ $RECYCLE.BIN/
 # Code
 venv
 datasets
+.venv
+bin
+starlake
+versions.sh
+audit
+generated
+history
+logs
+schedules
+storage
+.telemetry
