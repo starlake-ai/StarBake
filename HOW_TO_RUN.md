@@ -27,10 +27,10 @@ We're good to go
 1. Import from incoming to pending
 `./starlake import`
 
-2. Load data to bigquery
+2. Load data to local dir as parquet
 `./starlake load`
 
-3. Run the transformation in order
+3. Run the transformations in order
 
 ```bash
 ./starlake transform --name Customers.CustomerLifetimeValue 
@@ -45,12 +45,19 @@ We're good to go
 ./starlake transform --name Products.TopSellingProfitableProducts 
 ```
 
+4. Run the transformations recursively
+
+```bash
+./starlake transform --name Customers.HighValueCustomers --recursive
+./starlake transform --name Products.TopSellingProfitableProducts --recursive
+```
+
 ## Run DAGs
 
 1. Install the dagster webserver
    `python3 -m pip install dagster-webserver`
 2. Install the starlake dagster libraries for shell
-   `python3 -m pip install starlake-dagster[shell]`
+   `python3 -m pip install 'starlake-dagster[shell]'`
 3. Generate DAGs
 `./starlake dag-generate --clean`
 4. Load the DAGs with dagster
