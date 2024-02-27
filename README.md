@@ -1,17 +1,18 @@
 ## StarBake
 
-**StarBake** is a fictional & demonstrative project designed to showcase the usage of Starlake for data transformation and analytics in an e-commerce bakery business setting. The project begins by collecting raw operational data from various sources, such as digital transactions, inventory management.
+Welcome to the StarBake project tutorial! This guide will walk you through the end-to-end process of using Starlake to transform raw operational data into insightful business analytics.
 
-This data is organized into five primary tables: Customers, Orders, OrderLines, Products, and Suppliers. Each table contains relevant data fields that are updated daily. Data arrives in [JSON](https://en.wikipedia.org/wiki/JSON#Syntax), [NDJSON](https://en.wikipedia.org/wiki/JSON_streaming#Newline-delimited_JSON), or [CSV](https://en.wikipedia.org/wiki/Comma-separated_values) format.
+StarBake aims to offer hands-on experience with Starlake, using Google BigQuery as the primary data warehousing solution. This tutorial covers essential aspects of the data transformation process, including 
+- extracting data from various sources,
+- raw data ingestion
+- transformation into business insights
+- orchestrating the ingestion and transformation process.
 
-The core of the StarBake project lies in its transformation of the ingested raw data. The data is converted into meaningful business insights by creating a series of analytical-ready tables: CustomerLifetimeValue, ProductPerformance, ProductProfitability, HighValueCustomers, TopSellingProducts, and MostProfitableProducts. Further tables (TopSellingProfitableProducts and HighValueCustomerPreferences) are created by joining multiple transformed tables to deliver more nuanced business insights.
-
-The final goal of StarBake is to provide users a practical understanding of how Starlake can be harnessed for data ingestion, transformation, and analytics. The project focuses on Google BigQuery as the data warehousing solution. Through this project, users will get hands-on experience in gleaning a wide range of business insights, including customer lifetime value, product performance, product profitability, and customer preferences.
 
 
-### Tables to Ingest:
+### 1. Data Structure To Extract
 
-Here's a breakdown of the tables with column descriptions:
+StarBake project focuses mainly on four tables: Customers, Orders, OrderLines, and Products. Each table contains daily updated operational data from the e-commerce bakery business. The databases use specific identifiers (customer_id, order_id, product_id) to form relationships.
 
 1. **customers:** This table contains information about the bakery's customers. The data for this table arrives in CSV format, updated daily with deltas.
     - `customer_id`: A unique identifier for each customer.
@@ -75,12 +76,13 @@ erDiagram
         string category
     }
 
-
 ```
 
-**### Business Insights transformations:
 
-### Business Insights Transformations:
+### 2. Data Ingestion
+
+
+### 3. Business Insights Transformations:
 
 1. **CustomerOrders:** A table derived from the `Customers` and `Orders` tables, displaying the customer ID, customer's full name, total number of orders made by each customer, and the average order value.
 
@@ -138,7 +140,8 @@ classDiagram
 
 ```
 
-The project aims to give users a practical understanding of Starlake's functionalities, allowing them to leverage these features for their data transformation and analytics requirements.
+### 4. Orchestration
+
 
 ## How to run
 Please check [HOW_TO_RUN.md](HOW_TO_RUN.md)
