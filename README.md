@@ -12,18 +12,10 @@ StarBake aims to offer hands-on experience with Starlake, using Google BigQuery 
 
 ### 1. Data Structure To Extract
 
-StarBake project focuses mainly on four tables: Customers, Orders, OrderLines, and Products. Each table contains daily updated operational data from the e-commerce bakery business. The databases use specific identifiers (customer_id, order_id, product_id) to form relationships.
+StarBake project focuses mainly on four tables: Customers, Orders, OrderLines, and Products. Each table contains daily updated operational data from the e-commerce bakery business. The databases use specific identifiers (order_id, product_id) to form relationships.
 
-1. **customers:** This table contains information about the bakery's customers. The data for this table arrives in CSV format, updated daily with deltas.
-    - `customer_id`: A unique identifier for each customer.
-    - `first_name`: The customer's first name.
-    - `last_name`: The customer's last name.
-    - `email`: The customer's email address.
-    - `join_date`: The date when the customer joined.
-
-2. **orders:** This table contains information about the bakery's orders. The data for this table arrives in JSON format, updated daily with deltas.
+1**orders:** This table contains information about the bakery's orders. The data for this table arrives in JSON format, updated daily with deltas.
     - `order_id`: A unique identifier for each order.
-    - `customer_id`: An identifier for the customer who placed the order, referencing `Customers.customer_id`.
     - `timestamp`: The date and time when the order was placed.
     - `status`: The status of the order, like 'placed', 'shipped', or 'delivered'.
 
@@ -37,26 +29,18 @@ StarBake project focuses mainly on four tables: Customers, Orders, OrderLines, a
     - `product_id`: A unique identifier for each product.
     - `name`: The product's name.
     - `price`: The current price of the product.
+    - `cost`: The cost of the product.
     - `description`: A detailed description of the product.
     - `category`: The category of the product, like 'bread', 'cake', or 'pastry'.
 
 ```mermaid
 erDiagram
-    ORDERS ||--o{ CUSTOMERS : "is placed by"
     PRODUCTS ||--o{ ORDER_LINES : "in"
     ORDERS ||--o{ ORDER_LINES : "includes"
 
-    CUSTOMERS {
-        string customer_id PK
-        string first_name
-        string last_name
-        string email
-        date join_date
-    }
-
     ORDERS {
         string order_id PK
-        string customer_id FK
+        string customer_id 
         datetime timestamp
         string status
     }
@@ -65,13 +49,14 @@ erDiagram
         string order_id FK
         string product_id FK
         int quantity
-        decimal price
+        decimal sale_price
     }
 
     PRODUCTS {
         string product_id PK
         string name
         decimal price
+        decimal cost
         string description
         string category
     }
@@ -84,59 +69,51 @@ erDiagram
 
 ### 3. Business Insights Transformations:
 
-1. **CustomerOrders:** A table derived from the `Customers` and `Orders` tables, displaying the customer ID, customer's full name, total number of orders made by each customer, and the average order value.
-
-2. **OrderDetails:** A table formed from the `Orders`, `OrderLines`, and `Products` tables. The OrderDetails table includes all the essential details of an order made from a particular customer, including order ID, customer ID, the timestamp of the order, order status, and an array of order line items.
-
-3. **CustomerOrderDetails:** An extension of the `OrderDetails` and `CustomerOrders` tables, this new table provides a comprehensive view into the behavior of each customer, containing information about order details along with the customer's full name, total number of orders, and the average order value.
+1. **product_performance**: This table is derived from the Products, Orders, and OrderLines tables.
+2. **order_details**: This table is generated from Orders and OrderLines tables. It provides details about every order.
+3. **product_performance_summary**: : This table is a summarized version of the product_performance and order_details tables.
 
 ```mermaid
 classDiagram
+    products <|-- product_summary
+    orders <|-- product_summary
+    order_lines <|-- product_summary
 
-    Products --|> OrderDetails: uses
-    Orders --|> OrderDetails: uses
-    Customers --|> CustomerOrders: uses
-    Orders --|> CustomerOrders: uses
-    OrderLines --|> OrderDetails: uses
 
-    OrderDetails --|> CustomerOrderDetails: uses
-    CustomerOrders --|> CustomerOrderDetails: uses
+    order_lines <|-- revenue_summary
+    orders <|-- revenue_summary
 
-    class Customers{
+
+    revenue_summary <|-- order_summary
+    product_summary <|-- order_summary
+
+    class orders { }
+
+    class order_lines { }
+
+    class products { }
+
+    class product_summary{
+        product_id
+        product_name
+        total_units_sold
+        order_id
+        order_date
     }
 
-    class Orders {
+
+    class revenue_summary{
+        order_id
+        order_date
+        total_revenue
     }
 
-    class OrderLines {
+    class order_summary{
+        order_id
+        order_date
+        total_revenue
+        total_units_sold
     }
-
-    class Products {
-    }
-
-    class OrderDetails {
-        string order_id PK
-        string customer_id FK
-        datetime timestamp
-        string status
-        OrderLines order_lines[] array
-    }
-
-    class CustomerOrders {
-        string customer_id FK
-        string customer_full_name
-        integer total_orders
-        decimal average_order_value
-    }
-
-    class CustomerOrderDetails {
-        string customer_id FK
-        string customer_full_name
-        integer total_orders
-        decimal average_order_value
-        OrderLines order_lines[] array
-    }
-
 
 ```
 
