@@ -97,6 +97,7 @@ classDiagram
         product_id
         product_name
         total_units_sold
+        profit
         order_id
         order_date
     }
@@ -112,6 +113,7 @@ classDiagram
         order_id
         order_date
         total_revenue
+        profit
         total_units_sold
     }
 

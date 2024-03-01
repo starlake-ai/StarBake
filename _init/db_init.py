@@ -27,8 +27,9 @@ if len(sys.argv) != 2 or sys.argv[1].lower() not in ['postgres', 'mysql', 'mssql
     print("Usage: python filename.py [postgres|mysql|mssql]")
     sys.exit()
 
-#GET var env
+# GET var env
 DB_HOSTNAME = os.environ.get('DB_HOSTNAME', "localhost")
+
 
 def create_db_engine(database_system):
     if database_system == 'postgres':
@@ -58,10 +59,8 @@ else:
     raise OperationalError("Failed to connect after 5 attempts. Please check your database settings.")
 
 # Generate data for customers
-customers_data = {(i + 1, fake.first_name(), fake.last_name(), fake.email(), fake.date_time_this_year()) for i in
-                  range(num_customers)}
-df_customers = pd.DataFrame(customers_data, columns=['customer_id', 'first_name', 'last_name', 'email', 'join_date'])
-df_customers.to_sql('customers', engine, if_exists='append', index=False)
+customers_data = {(i + 1) for i in range(num_customers)}
+df_customers = pd.DataFrame(customers_data, columns=['customer_id'])
 
 # Generate data for products
 product_id = 0
@@ -72,9 +71,14 @@ for category, products in bakery_categories_products.items():
         product_id += 1
         price = round(random.uniform(5, 30), 2)
         description = 'Description for ' + product_name
-        products_data.append((product_id, product_name, price, description, category))
+        products_data.append((
+            product_id,
+            product_name,
+            price,
+            float("{:.2f}".format(price * 0.85)),  # Calculate cost as 85% of price
+            description, category))
 
-df_products = pd.DataFrame(products_data, columns=['product_id', 'name', 'price', 'description', 'category'])
+df_products = pd.DataFrame(products_data, columns=['product_id', 'name', 'price', 'cost', 'description', 'category'])
 df_products.to_sql('products', engine, if_exists='append', index=False)
 
 # Generate data for orders and order_lines
@@ -98,7 +102,7 @@ for i in range(num_orders):
 df_orders = pd.DataFrame(orders_data, columns=['order_id', 'customer_id', 'timestamp', 'status'])
 df_orders.to_sql('orders', engine, if_exists='append', index=False)
 
-df_order_lines = pd.DataFrame(order_lines_data, columns=['order_id', 'product_id', 'quantity', 'price'])
+df_order_lines = pd.DataFrame(order_lines_data, columns=['order_id', 'product_id', 'quantity', 'sale_price'])
 df_order_lines.to_sql('order_lines', engine, if_exists='append', index=False)
 
 print("Data generated and inserted into the database successfully!")
