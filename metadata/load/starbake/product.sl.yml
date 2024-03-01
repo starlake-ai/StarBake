@@ -1,9 +1,9 @@
 ---
 table:
-  name: "Ingredients"
-  pattern: "ingredients_.*.tsv"
+  name: "product"
+  pattern: "products_.*.json"
   attributes:
-  - name: "ingredient_id"
+  - name: "product_id"
     type: "int"
     array: false
     required: true
@@ -16,29 +16,41 @@ table:
     privacy: "NONE"
     ignore: false
   - name: "price"
-    type: "decimal"
+    type: "double"
     array: false
     required: true
     privacy: "NONE"
     ignore: false
-  - name: "quantity_in_stock"
-    type: "decimal"
+  - name: "cost"
+    type: "double"
     array: false
     required: true
+    privacy: "NONE"
+    ignore: false
+  - name: "description"
+    type: "string"
+    array: false
+    required: false
+    privacy: "NONE"
+    ignore: false
+  - name: "category"
+    type: "string"
+    array: false
+    required: false
     privacy: "NONE"
     ignore: false
   metadata:
     mode: "FILE"
-    format: "DSV"
+    format: "JSON"
     encoding: "UTF-8"
     multiline: false
     array: false
-    withHeader: true
-    separator: "\t"
+    withHeader: false
+    separator: ""
     quote: "\""
     escape: "\\"
-    write: "OVERWRITE"
+    write: "APPEND"
     sink:
       connectionRef: "{{connectionRef}}"
   primaryKey:
-  - "ingredient_id"
+  - "product_id"

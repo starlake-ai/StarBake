@@ -14,7 +14,7 @@ StarBake aims to offer hands-on experience with Starlake, using Google BigQuery 
 
 StarBake project focuses mainly on four tables: Customers, Orders, OrderLines, and Products. Each table contains daily updated operational data from the e-commerce bakery business. The databases use specific identifiers (order_id, product_id) to form relationships.
 
-1**orders:** This table contains information about the bakery's orders. The data for this table arrives in JSON format, updated daily with deltas.
+1**order:** This table contains information about the bakery's orders. The data for this table arrives in JSON format, updated daily with deltas.
     - `order_id`: A unique identifier for each order.
     - `timestamp`: The date and time when the order was placed.
     - `status`: The status of the order, like 'placed', 'shipped', or 'delivered'.
@@ -25,7 +25,7 @@ StarBake project focuses mainly on four tables: Customers, Orders, OrderLines, a
     - `quantity`: The quantity of this product in the order.
     - `price`: The price of the product at the time of ordering.
 
-4. **products:** This table contains information about the bakery's products. The data for this table arrives in JSON_ND format, updated daily with deltas.
+4. **product:** This table contains information about the bakery's products. The data for this table arrives in JSON_ND format, updated daily with deltas.
     - `product_id`: A unique identifier for each product.
     - `name`: The product's name.
     - `price`: The current price of the product.
@@ -35,24 +35,24 @@ StarBake project focuses mainly on four tables: Customers, Orders, OrderLines, a
 
 ```mermaid
 erDiagram
-    PRODUCTS ||--o{ ORDER_LINES : "in"
-    ORDERS ||--o{ ORDER_LINES : "includes"
+    product ||--o{ order_line : "in"
+    order ||--o{ order_line : "includes"
 
-    ORDERS {
+    order {
         string order_id PK
         string customer_id 
         datetime timestamp
         string status
     }
 
-    ORDER_LINES {
+    order_line {
         string order_id FK
         string product_id FK
         int quantity
         decimal sale_price
     }
 
-    PRODUCTS {
+    product {
         string product_id PK
         string name
         decimal price
@@ -69,29 +69,29 @@ erDiagram
 
 ### 3. Business Insights Transformations:
 
-1. **product_performance**: This table is derived from the Products, Orders, and OrderLines tables.
-2. **order_details**: This table is generated from Orders and OrderLines tables. It provides details about every order.
-3. **product_performance_summary**: : This table is a summarized version of the product_performance and order_details tables.
+1. **product_summary**: This table highlighting each product's performance. It connects to the Product and Order tables, providing data on unit sales and profits for each product.
+2. **order_summary**: This table offers condensed data on the starbake's revenue from each sale. It pulls data from order and order_line tables, delivering insights on income sources and financial status.
+3. **revenue_summary**: This table aggregates business data for each order, taking details from revenue_summary and product_summary. This gives a complete view of each order's impact.
 
 ```mermaid
 classDiagram
-    products <|-- product_summary
-    orders <|-- product_summary
-    order_lines <|-- product_summary
+    product <|-- product_summary
+    order <|-- product_summary
+    order_line <|-- product_summary
 
 
-    order_lines <|-- revenue_summary
-    orders <|-- revenue_summary
+    order_line <|-- revenue_summary
+    order <|-- revenue_summary
 
 
     revenue_summary <|-- order_summary
     product_summary <|-- order_summary
 
-    class orders { }
+    class order { }
 
-    class order_lines { }
+    class order_line { }
 
-    class products { }
+    class product { }
 
     class product_summary{
         product_id

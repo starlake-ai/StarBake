@@ -1,6 +1,6 @@
 ---
 table:
-  name: "Orders"
+  name: "order"
   pattern: "orders_.*.json"
   attributes:
   - name: "order_id"
@@ -14,7 +14,6 @@ table:
     array: false
     required: true
     privacy: "NONE"
-    foreignKey: "Customers.customer_id"
     ignore: false
   - name: "timestamp"
     type: "iso_instant"
@@ -27,32 +26,6 @@ table:
     array: false
     required: true
     privacy: "NONE"
-    ignore: false
-  - name: "products"
-    type: "struct"
-    array: true
-    required: true
-    privacy: "NONE"
-    attributes:
-    - name: "product_id"
-      type: "int"
-      array: false
-      required: true
-      privacy: "NONE"
-      foreignKey: "Products.product_id"
-      ignore: false
-    - name: "quantity"
-      type: "int"
-      array: false
-      required: false
-      privacy: "NONE"
-      ignore: false
-    - name: "price"
-      type: "double"
-      array: false
-      required: true
-      privacy: "NONE"
-      ignore: false
     ignore: false
   metadata:
     mode: "FILE"

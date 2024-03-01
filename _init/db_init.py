@@ -79,7 +79,7 @@ for category, products in bakery_categories_products.items():
             description, category))
 
 df_products = pd.DataFrame(products_data, columns=['product_id', 'name', 'price', 'cost', 'description', 'category'])
-df_products.to_sql('products', engine, if_exists='append', index=False)
+df_products.to_sql('product', engine, if_exists='append', index=False)
 
 # Generate data for orders and order_lines
 statuses = ["Delivered", "Pending", "Cancelled"]
@@ -100,9 +100,9 @@ for i in range(num_orders):
     order_lines_data.append((i + 1, product_id, quantity, price))
 
 df_orders = pd.DataFrame(orders_data, columns=['order_id', 'customer_id', 'timestamp', 'status'])
-df_orders.to_sql('orders', engine, if_exists='append', index=False)
+df_orders.to_sql('order', engine, if_exists='append', index=False)
 
 df_order_lines = pd.DataFrame(order_lines_data, columns=['order_id', 'product_id', 'quantity', 'sale_price'])
-df_order_lines.to_sql('order_lines', engine, if_exists='append', index=False)
+df_order_lines.to_sql('order_line', engine, if_exists='append', index=False)
 
 print("Data generated and inserted into the database successfully!")
