@@ -1,50 +1,46 @@
 ---
 table:
-  name: "Customers"
-  pattern: "customers_.*.csv"
+  name: "order_lines"
+  pattern: "order_lines.*.json"
   attributes:
-  - name: "customer_id"
+  - name: "order_id"
     type: "int"
     array: false
     required: true
     privacy: "NONE"
     ignore: false
-  - name: "first_name"
-    type: "string"
+    foreignKey: "order.order_id"
+  - name: "product_id_id"
+    type: "int"
     array: false
     required: true
     privacy: "NONE"
     ignore: false
-  - name: "last_name"
-    type: "string"
+    foreignKey: "product.product_id"
+  - name: "quantity"
+    type: "int"
     array: false
     required: true
     privacy: "NONE"
     ignore: false
-  - name: "email"
-    type: "string"
-    array: false
-    required: true
-    privacy: "NONE"
-    ignore: false
-  - name: "join_date"
-    type: "date"
+  - name: "sale_price"
+    type: "double"
     array: false
     required: true
     privacy: "NONE"
     ignore: false
   metadata:
     mode: "FILE"
-    format: "DSV"
+    format: "JSON"
     encoding: "UTF-8"
-    multiline: false
-    array: false
-    withHeader: true
-    separator: ","
+    multiline: true
+    array: true
+    withHeader: false
+    separator: ""
     quote: "\""
     escape: "\\"
-    write: "OVERWRITE"
+    write: "APPEND"
     sink:
       connectionRef: "{{connectionRef}}"
   primaryKey:
-  - "customer_id"
+  - "order_id"

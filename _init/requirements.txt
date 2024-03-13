@@ -1,0 +1,7 @@
+pandas==2.2.1
+numpy==1.25.1
+Faker==23.2.1
+sqlalchemy==2.0.27
+psycopg2-binary==2.9.9
+mysqlclient==2.2.4
+pyodbc==5.1.0
