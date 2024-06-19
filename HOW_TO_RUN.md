@@ -15,7 +15,9 @@ Before installing starbake, ensure the following minimum versions are installed 
    cd Starbake
    ```
 1. Install Starlake
-`sh <(curl https://raw.githubusercontent.com/starlake-ai/starlake/master/distrib/setup.sh) --target=.`
+   ```bash
+   sh <(curl https://raw.githubusercontent.com/starlake-ai/starlake/master/distrib/setup.sh) --target=.
+   ```
 2. Create a virtual environment (optional)
    ```bash
    python3 -m pip install virtualenv
