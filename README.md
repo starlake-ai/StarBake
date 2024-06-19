@@ -34,7 +34,7 @@ Here's a breakdown of the tables with column descriptions:
     - `product_id` (PK): A unique identifier for each product. Data type: Integer or UUID.
     - `name`: The product's name. Data type: String. 
     - `details`: A record containing additional details about the product.
-        - `price`: The current[orders.yaml](domains%2Forders.yaml) price of the product. Data type: Decimal.
+        - `price`: The current price of the product. Data type: Decimal.
         - `description`: A detailed description of the product. Data type: String.
         - `category`: The category of the product, such as 'bread', 'cake', or 'pastry'. Data type: String.
     - `ingredients`: An array of objects, each containing `ingredient_id` and `quantity`. Each object represents an ingredient needed to make the product.
