@@ -9,6 +9,11 @@ Before installing starbake, ensure the following minimum versions are installed 
 
 ## Install
 
+0. Clone the Starbake project and set StarBake as current dir. 
+   ```bash
+   git clone https://github.com/starlake-ai/StarBake.git 
+   cd Starbake
+   ```
 1. Install Starlake
 `sh <(curl https://raw.githubusercontent.com/starlake-ai/starlake/master/distrib/setup.sh) --target=.`
 2. Create a virtual environment (optional)
