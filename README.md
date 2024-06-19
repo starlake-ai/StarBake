@@ -95,7 +95,7 @@ erDiagram
 
 2. **ProductPerformance:** This table provides details on the performance of each product sold at the bakery, including the total number of units sold, total revenue generated, and average revenue per unit sold. It's derived from the `Orders` and `Products` tables.
 
-3. **ProductProfitability:** This table offers insights into the profitability of each product. It considers the cost of production (based on the `Products` table & `INGREDIENTS` table for the cost of ingredients).
+3. **ProductProfitability:** This table offers insights into the profitability of each product. It considers the cost of production (based on the `Products` table & `Ingredients` table for the cost of ingredients).
 
 4. **HighValueCustomers:** This table identifies customers with the highest lifetime value, making it easier to target these customers for marketing campaigns. It's derived from the `CustomerLifetimeValue` table.
 
