@@ -34,7 +34,7 @@ Here's a breakdown of the tables with column descriptions:
     - `product_id` (PK): A unique identifier for each product. Data type: Integer or UUID.
     - `name`: The product's name. Data type: String. 
     - `details`: A record containing additional details about the product.
-        - `price`: The current[orders.yaml](domains%2Forders.yaml) price of the product. Data type: Decimal.
+        - `price`: The current price of the product. Data type: Decimal.
         - `description`: A detailed description of the product. Data type: String.
         - `category`: The category of the product, such as 'bread', 'cake', or 'pastry'. Data type: String.
     - `ingredients`: An array of objects, each containing `ingredient_id` and `quantity`. Each object represents an ingredient needed to make the product.
@@ -95,7 +95,7 @@ erDiagram
 
 2. **ProductPerformance:** This table provides details on the performance of each product sold at the bakery, including the total number of units sold, total revenue generated, and average revenue per unit sold. It's derived from the `Orders` and `Products` tables.
 
-3. **ProductProfitability:** This table offers insights into the profitability of each product. It considers the cost of production (based on the `Products` table & `INGREDIENTS` table for the cost of ingredients).
+3. **ProductProfitability:** This table offers insights into the profitability of each product. It considers the cost of production (based on the `Products` table & `Ingredients` table for the cost of ingredients).
 
 4. **HighValueCustomers:** This table identifies customers with the highest lifetime value, making it easier to target these customers for marketing campaigns. It's derived from the `CustomerLifetimeValue` table.
 

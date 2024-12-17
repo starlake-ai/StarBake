@@ -9,17 +9,38 @@ Before installing starbake, ensure the following minimum versions are installed 
 
 ## Install
 
+0. Clone the Starbake project and set StarBake as current dir. 
+   ```bash
+   git clone https://github.com/starlake-ai/StarBake.git 
+   cd Starbake
+   ```
 1. Install Starlake
-`sh <(curl https://raw.githubusercontent.com/starlake-ai/starlake/master/distrib/setup.sh) --target=.`
+   ```bash
+   sh <(curl https://raw.githubusercontent.com/starlake-ai/starlake/master/distrib/setup.sh) --target=.
+   ```
 2. Create a virtual environment (optional)
-   `python3 -m pip install virtualenv`
-   `python3 -m venv .venv`
-3. Activate the virtual environment (optional)
-   `source .venv/bin/activate`
-4. Generate dummy files
-   `python3 -m pip install -r _scripts/requirements.txt`
-   `python3 _scripts/dummy_data_generator.py`
+   ```bash
+   python3 -m pip install virtualenv
+   ```
+   If your python environment is externaly managed, install it with your prefered package manager. 
 
+   For exemple with `brew` on MacOS:
+   ```bash
+   brew install virtualenv
+   ```
+   Then create your virtual env
+   ```bash
+   python3 -m venv .venv
+   ```
+3. Activate the virtual environment (optional)
+   ```bash
+   source .venv/bin/activate
+   ```
+4. Generate dummy files
+   ```bash
+   python3 -m pip install -r _scripts/requirements.txt
+   python3 _scripts/dummy_data_generator.py
+   ```
 We're good to go
 
 ## Run Starlake
